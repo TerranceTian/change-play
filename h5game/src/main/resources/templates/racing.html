@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>H5原野赛车</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+        }
+        .game-container {
+            position: relative;
+        }
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1;
+        }
+        #gameArea {
+            border: 1px solid #ccc;
+            background-color: #4a4a4a;
+        }
+        .chat-container {
+            margin-left: 20px;
+            width: 300px;
+            background: white;
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            height: 800px;
+        }
+        .chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #f9f9f9;
+        }
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input input {
+            flex-grow: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .chat-input button {
+            padding: 5px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .chat-input button:hover {
+            background: #45a049;
+        }
+        .system-message {
+            color: #666;
+            font-style: italic;
+        }
+        .user-message {
+            margin: 5px 0;
+        }
+        .user-message .username {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .timestamp {
+            color: #888;
+            font-size: 0.9em;
+            margin-right: 5px;
+        }
+        #info {
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .game-info {
+            margin-bottom: 10px;
+            padding: 5px;
+            border-bottom: 1px solid #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div id="info">
+            <div class="game-info">
+                <div>玩家: <span id="playerName"></span></div>
+                <div>剩余生命值: <span id="health">20</span></div>
+                <div>当前速度: <span id="speed">0</span></div>
+            </div>
+            <div>
+                <h3>操作说明：</h3>
+                <p>方向键/WASD：控制方向</p>
+                <p>空格键：发射炮弹</p>
+            </div>
+        </div>
+        <canvas id="gameArea" width="800" height="800"></canvas>
+    </div>
+    
+    <div class="chat-container">
+        <h2>赛车联赛聊天室</h2>
+        <div id="chat-messages" class="chat-messages"></div>
+        <div class="chat-input">
+            <input type="text" id="message-input" placeholder="输入消息...">
+            <button onclick="sendMessage()">发送</button>
+        </div>
+    </div>
+
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script th:inline="javascript">
+        // 获取用户名
+        const username = /*[[${username}]]*/ 'default';
+    </script>
+    <script src="/js/racing.js"></script>
+</body>
+</html>

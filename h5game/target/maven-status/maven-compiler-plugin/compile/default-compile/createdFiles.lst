@@ -1,0 +1,14 @@
+com\h5game\threebody\model\RacingState.class
+com\h5game\threebody\controller\ThreeBodyController.class
+com\h5game\threebody\simulation\ThreeBodySimulation.class
+com\h5game\threebody\config\SecurityConfig.class
+com\h5game\threebody\model\RacingInput.class
+com\h5game\threebody\entity\Body.class
+com\h5game\threebody\model\SimulationState.class
+com\h5game\threebody\ThreeBodyApplication.class
+com\h5game\threebody\controller\ChatController.class
+com\h5game\threebody\config\WebSocketConfig.class
+com\h5game\threebody\entity\Bullet.class
+com\h5game\threebody\entity\Car.class
+com\h5game\threebody\model\ChatMessage.class
+com\h5game\threebody\simulation\RacingSimulation.class
