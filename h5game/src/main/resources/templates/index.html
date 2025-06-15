@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Three Body Simulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group input {
+            padding: 10px;
+            width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        .button {
+            display: block;
+            width: 200px;
+            padding: 15px;
+            margin: 10px auto;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>    <div class="container">
+        <div class="input-group">
+            <label for="username">请输入您的用户名</label><br>
+            <input type="text" id="username" placeholder="请输入用户名">
+            <div id="error-message" class="error-message">请输入用户名</div>
+        </div>
+        <button onclick="enterGame('simulation')" class="button">进入H5三体运动</button>
+        <button class="button" onclick="alert('功能开发中...')">进入论坛</button>
+        <button onclick="enterGame('racing')" class="button">进入H5原野赛车</button>
+    </div>
+
+    <script>
+    function enterGame(type) {
+        const username = document.getElementById('username').value.trim();
+        const errorMessage = document.getElementById('error-message');
+        
+        if (!username) {
+            errorMessage.style.display = 'block';
+            return;
+        }
+        
+        // 跳转到相应页面
+        const url = type === 'simulation' ? '/simulation' : '/racing';
+        window.location.href = url + '?username=' + encodeURIComponent(username);
+    }
+    </script>
+</body>
+</html>

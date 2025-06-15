@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Three Body Simulation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+        }
+        .simulation-container {
+            position: relative;
+        }
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1;
+        }
+        #simulationArea {
+            border: 1px solid #ccc;
+            background-color: black;
+        }
+        .chat-container {
+            margin-left: 20px;
+            width: 300px;
+            background: white;
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            height: 800px;
+        }
+        .chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #f9f9f9;
+        }
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input input {
+            flex-grow: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .chat-input button {
+            padding: 5px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .chat-input button:hover {
+            background: #45a049;
+        }
+        .system-message {
+            color: #666;
+            font-style: italic;
+        }
+        .user-message {
+            margin: 5px 0;
+        }
+        .user-message .username {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .timestamp {
+            color: #888;
+            font-size: 0.9em;
+            margin-right: 5px;
+        }
+        .parameter-group {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="simulation-container">
+        <div id="info">
+            <div class="parameter-group">
+                <h3>系统参数</h3>
+                <div>引力常量 G: <span id="gravityConstant"></span></div>
+                <div>时间步长 dt: <span id="timeStep"></span></div>
+                <div>阻尼系数: <span id="dampingFactor"></span></div>
+            </div>
+            <div class="parameter-group">
+                <h3>实时状态</h3>
+                <div>当前时间: <span id="currentTime"></span></div>
+                <div>模拟时长: <span id="simulationTime"></span></div>
+            </div>
+            <div class="parameter-group">
+                <h3>红球</h3>
+                <div>速度: <span id="redSpeed"></span></div>
+                <div>坐标: <span id="redPos"></span></div>
+            </div>
+            <div class="parameter-group">
+                <h3>黄球</h3>
+                <div>速度: <span id="yellowSpeed"></span></div>
+                <div>坐标: <span id="yellowPos"></span></div>
+            </div>
+            <div class="parameter-group">
+                <h3>绿球</h3>
+                <div>速度: <span id="greenSpeed"></span></div>
+                <div>坐标: <span id="greenPos"></span></div>
+            </div>
+        </div>
+        <canvas id="simulationArea" width="800" height="800"></canvas>
+    </div>
+    
+    <div class="chat-container">
+        <h2>三体观察者聊天室</h2>
+        <div id="chat-messages" class="chat-messages"></div>
+        <div class="chat-input">
+            <input type="text" id="message-input" placeholder="输入消息...">
+            <button onclick="sendMessage()">发送</button>
+        </div>
+    </div>    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script th:inline="javascript">
+        // 获取用户名
+        const username = /*[[${username}]]*/ 'default';
+    </script>
+    <script src="/js/simulation.js"></script>
+</body>
+</html>
